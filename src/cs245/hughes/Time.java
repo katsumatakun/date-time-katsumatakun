@@ -63,6 +63,29 @@ public class Time {
         this.seconds = seconds;
     }
 
+    public void tick(){
+        try {
+            setSeconds(seconds+1);
+        }
+        catch (IllegalArgumentException e){
+            minutes += (seconds+1)/ 60;
+            seconds = (seconds+1) %60;
+        }
+        try {
+            setMinutes(minutes);
+        }
+        catch (IllegalArgumentException e){
+            hours += minutes/ 60;
+            this.minutes = minutes %60;
+        }
+        try {
+            setHours(hours);
+        }
+        catch (IllegalArgumentException e){
+            this.hours = hours %24;
+        }
+    }
+
     @Override
     public String toString() {
         return hours +":" + minutes + ":"+ seconds;
